@@ -1,0 +1,98 @@
+<div>
+    <h1 class="title">Lista de Películas</h1>
+    <div>
+    
+        <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+                <tr class="has-backgorund-light">
+                    <th>#</th>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Duración</th>
+                    <th>Clasificación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movies.forEach((movie, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= movie.title %></td>
+                        <td><%= movie.genre %></td>
+                        <td><%= movie.duration %> min</td>
+                        <td><%= movie.rating %></td>
+                        <td>
+                            <a href="/movies/edit/<%= movie.id %>" class="button is-small is-info">Editar</a>
+                            <button 
+                                class="button is-small is-danger" 
+                                onclick="confirmDelete(<%= movie.id %>)"
+                            >
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="subtitle mt-5">Agregar Película</h2>
+    <form action="/movies/create" method="POST" class="box">
+        <div class="field">
+            <label class="label">Título</label>
+            <div class="control">
+                <input class="input" type="text" name="title" placeholder="Título de la película" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Género</label>
+            <div class="control">
+                <input class="input" type="text" name="genre" placeholder="Género (e.g., Acción, Comedia)" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Duración (minutos)</label>
+            <div class="control">
+                <input class="input" type="number" name="duration" placeholder="Duración en minutos" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Clasificación</label>
+            <div class="control">
+                <input class="input" type="text" name="rating" placeholder="Clasificación (e.g., PG, R)" required>
+            </div>
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" type="submit">Agregar Película</button>
+            </div>
+            <div class="control">
+                <button class="button is-light" type="reset">Limpiar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(movieId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: '¡Esta acción no se puede deshacer!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirige a la ruta de eliminación
+                window.location.href = `/movies/delete/${movieId}`;
+            }
+        });
+    }
+</script>

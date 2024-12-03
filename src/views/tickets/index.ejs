@@ -1,0 +1,49 @@
+<div>
+    <h1 class="title">Boletos</h1>
+    <a href="/tickets/create" class="button is-primary mb-4">Agregar Boleto</a>
+    <table class="table is-fullwidth is-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Horario</th>
+                <th>Asiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% tickets.forEach((ticket, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= ticket.customer %></td>
+                    <td><%= ticket.schedule %></td>
+                    <td><%= ticket.seat_number %></td>
+                    <td>
+                        <a href="/tickets/edit/<%= ticket.id %>" class="button is-small is-info">Editar</a>
+                        <button class="button is-small is-danger" onclick="confirmDelete(<%= ticket.id %>)">Eliminar</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(ticketId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/tickets/delete/${ticketId}`;
+            }
+        });
+    }
+</script>

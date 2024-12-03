@@ -1,0 +1,32 @@
+<div class="box">
+    <h1 class="title">Editar Película</h1>
+    <form action="/movies/edit/<%= movie.id %>" method="POST">
+        <div class="field">
+            <label class="label">Título</label>
+            <div class="control">
+                <input class="input" type="text" name="title" value="<%= movie.title %>" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Género</label>
+            <div class="control">
+                <input class="input" type="text" name="genre" value="<%= movie.genre %>" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Duración</label>
+            <div class="control">
+                <input class="input" type="number" name="duration" value="<%= movie.duration %>" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Clasificación</label>
+            <div class="control">
+                <input class="input" type="text" name="rating" value="<%= movie.rating %>" required>
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-primary" type="submit">Guardar Cambios</button>
+        </div>
+    </form>
+</div>

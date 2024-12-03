@@ -1,0 +1,55 @@
+<div>
+    <h1 class="title">Horarios</h1>
+    <a href="/schedules/create" class="button is-primary mb-4">Agregar Horario</a>
+    <table class="table is-fullwidth is-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Película</th>
+                <th>Sala</th>
+                <th>Fecha y Hora</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% schedules.forEach((schedule, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= schedule.movie %></td>
+                    <td><%= schedule.room %></td>
+                    <td><%= schedule.date_time %></td>
+                    <td>
+                        <button 
+                            class="button is-small is-danger" 
+                            onclick="confirmDelete(<%= schedule.id %>)"
+                        >
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Incluye SweetAlert desde un CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(scheduleId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirige a la ruta de eliminación
+                window.location.href = `/schedules/delete/${scheduleId}`;
+            }
+        });
+    }
+</script>

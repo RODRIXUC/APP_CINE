@@ -1,0 +1,39 @@
+<div class="box">
+    <h1 class="title">Agregar Boleto</h1>
+    <form action="/tickets/create" method="POST">
+        <div class="field">
+            <label class="label">Cliente</label>
+            <div class="control">
+                <div class="select">
+                    <select name="customer_id" required>
+                        <% customers.forEach(customer => { %>
+                            <option value="<%= customer.id %>"><%= customer.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Horario</label>
+            <div class="control">
+                <div class="select">
+                    <select name="schedule_id" required>
+                        <% schedules.forEach(schedule => { %>
+                            <option value="<%= schedule.id %>"><%= schedule.date_time %> <%= schedule.movie %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Número de Asiento</label>
+            <div class="control">
+                <input class="input" type="text" name="seat_number" placeholder="Asiento" required>
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-primary" type="submit">Guardar</button>
+        </div>
+    </form>
+</div>
+

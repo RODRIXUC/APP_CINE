@@ -1,0 +1,38 @@
+<div class="box">
+    <h1 class="title">Agregar Horario</h1>
+    <form action="/schedules/create" method="POST">
+        <div class="field">
+            <label class="label">Película</label>
+            <div class="control">
+                <div class="select">
+                    <select name="movie_id" required>
+                        <% movies.forEach(movie => { %>
+                            <option value="<%= movie.id %>"><%= movie.title %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Sala</label>
+            <div class="control">
+                <div class="select">
+                    <select name="room_id" required>
+                        <% rooms.forEach(room => { %>
+                            <option value="<%= room.id %>"><%= room.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Fecha y Hora</label>
+            <div class="control">
+                <input class="input" type="datetime-local" name="date_time" required>
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-primary" type="submit">Guardar</button>
+        </div>
+    </form>
+</div>
